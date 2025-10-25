@@ -1,0 +1,494 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Space+Grotesk:wght@400;600&display=swap");
+
+/* ============================ BASE ============================ */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at 20% 20%, #0c0f1a 0%, #080a12 100%);
+  color: #e4e7ef;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+.app {
+  width: 100%;
+  max-width: 1250px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(20px);
+  padding: 36px;
+  animation: fadeIn 0.9s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================ HEADER ============================ */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.top h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  background: linear-gradient(90deg, #00d9ff, #8a5cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* ============================ BUTTONS ============================ */
+button {
+  background: linear-gradient(90deg, #6c55ff, #00d4ff);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 10px 18px;
+  font-size: 0.96rem;
+  transition: all 0.3s ease;
+}
+
+button:hover { transform: translateY(-2px); box-shadow: 0 0 16px rgba(0, 212, 255, 0.45); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.connected {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 9px 15px;
+  border-radius: 10px;
+  font-family: "Space Grotesk", monospace;
+  font-size: 0.92rem;
+  color: #00d4ff;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+}
+
+/* ============================ LAYOUT ============================ */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============================ CARDS ============================ */
+.card {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  transition: all 0.35s ease;
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+}
+
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55); }
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #00cfff;
+  font-size: 1.15rem;
+}
+
+/* ============================ INPUTS ============================ */
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px 5px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.96rem;
+  outline: none;
+  transition: 0.25s;
+}
+input:focus { border-color: #00d4ff; box-shadow: 0 0 12px rgba(0, 212, 255, 0.25); }
+
+/* ============================ ADMIN SECTION ============================ */
+.admin-actions { display: flex; flex-direction: column; gap: 14px; }
+.refund-block { display: flex; flex-wrap: wrap; gap: 10px; }
+.refund-block input { flex: 1 1 220px; min-width: 180px; }
+.refund-block button { flex: 0 0 auto; white-space: nowrap; }
+
+/* ============================ TRANSACTIONS ============================ */
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 340px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+th { color: #00cfff; font-weight: 600; text-transform: uppercase; }
+td { color: #e8ebf4; }
+tr:hover td { background: rgba(255, 255, 255, 0.04); color: #fff; }
+
+.status-paid { color: #00ff99; font-weight: 600; }
+.status-refunded { color: #ffcc00; font-weight: 600; }
+
+.action-btn { padding: 6px 12px; font-size: 0.85rem; border-radius: 8px; cursor: pointer; }
+.action-btn:hover { transform: translateY(-1px); }
+
+/* ============================ MODAL ============================ */
+.modal-backdrop {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+  
+}
+
+.modal-content {
+  background: #111228;
+  padding: 24px;
+  border-radius: 16px;
+  max-width: 450px;
+  width: 90%;
+  color: #fff;
+  position: relative;
+}
+
+.modal-content h3 { margin-top: 0; color: #00d4ff; margin-bottom: 12px; }
+.modal-content a { color: #00d4ff; text-decoration: underline; }
+.modal-content button { margin-top: 16px; width: 100%; }
+
+/* ============================ FOOTER ============================ */
+.foot { text-align: center; margin-top: 28px; font-size: 0.84rem; color: rgba(255, 255, 255, 0.5); }
+
+/* ============================ RESPONSIVE ============================ */
+@media (max-width:1000px) { .main { grid-template-columns:1fr; } }
+@media (max-width:720px) {
+  .controls { flex-direction: column; align-items: flex-start; }
+  .top h1 { font-size: 1.6rem; }
+  .card { padding: 18px; }
+  button { font-size: 0.85rem; padding: 8px 12px; }
+  .card table { font-size: 0.85rem; }
+  .table-wrapper { max-height: 260px; }
+}
+@media (max-width:500px) {
+  table { min-width: 400px; font-size: 0.75rem; }
+  th, td { padding: 5px 6px; }
+  input { font-size: 0.85rem; }
+  button { font-size: 0.8rem; padding: 5px 8px; }
+  .modal-content { width: 95%; padding: 16px; }
+}
+@media (max-width:400px) {
+  table { min-width: 350px; font-size: 0.7rem; }
+  th, td { padding: 4px 5px; }
+  .main { gap: 16px; }
+  input { font-size: 0.8rem; padding: 6px; }
+  button { font-size: 0.75rem; padding: 4px 6px; }
+}
+@media (max-width:300px) {
+  table { min-width: 300px; font-size: 0.65rem; }
+  th, td { padding: 3px 4px; }
+  input { font-size: 0.75rem; padding: 5px; }
+  button { font-size: 0.7rem; padding: 3px 5px; }
+  .main { gap: 12px; }
+  .card { padding: 12px; border-radius: 12px; }
+}
+
+
+.view-detail-btn {
+  display: inline-block;
+  text-align: center;
+  line-height: 1.2; /* thoda spacing between View and Detail */
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #6c55ff, #00d4ff);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.view-detail-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+.view-detail-wrapper span {
+  display: block;
+  width: 100%; /* same width as button */
+  text-align: center;
+  font-size: 0.75rem;
+  background: linear-gradient(90deg, #6c55ff, #00d4ff);
+  color: #fff;
+  padding: 4px 0;
+  border-radius: 6px;
+  pointer-events: none; /* non-clickable */
+}
+
+
+.how-to-modern {
+  /* width: 100%; */
+  padding: 60px 24px;
+  color: #e8f0ff;
+  border-radius: 24px;
+  margin-top: 10px;
+}
+
+.how-to-container {
+  max-width: 1200px;
+  margin: auto;
+  text-align: center;
+}
+
+.how-to-modern h2 {
+  font-family: "Space Grotesk", "Orbitron", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00e0ff, #a16eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 24px;
+  letter-spacing: 0.8px;
+}
+
+.how-to-modern .intro {
+  font-family: "Inter", "Poppins", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: #cfd9f9;
+  margin-bottom: 44px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.step-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 18px;
+  padding: 26px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: "Inter", "Poppins", sans-serif;
+  text-align: left;
+  color: #eaf1ff;
+  letter-spacing: 0.2px;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 212, 255, 0.35);
+}
+
+.step-number {
+  font-family: "Space Grotesk", "Orbitron", sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #00d4ff;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+.step-card p {
+  font-family: "Inter", "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #d9e3ff;
+}
+
+@media (max-width: 900px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 250px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 15, 30, 0.75);
+  /* backdrop-filter: blur(6px); */
+  z-index: 999;
+}
+
+/* Best centering technique */
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%); /* fine-tuned: slightly above true center */
+  background: rgba(25, 30, 45, 0.96);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 16px;
+  padding: 28px 32px;
+  max-width: 480px;
+  width: 90%;
+  color: #e4e7ef;
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+  animation: modalPop 0.3s ease;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+/* Smooth scale fade effect */
+@keyframes modalPop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -52%) scale(1);
+  }
+}
+
+/* --- Updated layout for top cards + transaction --- */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.top-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+}
+
+
+@media (max-width: 720px) {
+  .top-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================ ALERT ============================ */
+.custom-alert {
+  position: fixed;
+  top: 20px; /* top-center, scroll safe */
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(145deg, rgba(15,15,40,0.95), rgba(30,30,60,0.95));
+  color: #e4e7ef;
+  border-radius: 14px;
+  padding: 20px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(0,212,255,0.5), 0 0 40px rgba(108,85,255,0.3);
+  border: 2px solid rgba(0,212,255,0.7);
+  z-index: 11000;
+  animation: fadeInOut 2.5s ease forwards;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.9); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.9); }
+}
+
+
+.title-container {
+  display: flex;
+  align-items: center;     
+  justify-content: center; 
+  gap: 8px;                
+  margin: 0 auto;          
+  flex-wrap: wrap;          
+}
+
+.title-container h2 {
+  font-family: "Space Grotesk", "Orbitron", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00e0ff, #a16eff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: 0.8px;
+  text-align: center;       
+}
+
+.title-container .emoji {
+  font-size: 2.3rem; 
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 720px) {
+  .title-container {
+    gap: 6px; /* emoji aur text thoda closer */
+  }
+  .title-container h2 {
+    font-size: 1.8rem; /* heading chhota ho jaye */
+  }
+  .title-container .emoji {
+    font-size: 1.8rem; 
+  }
+}
+
+@media (max-width: 500px) {
+  .title-container {
+    gap: 4px;
+    /* flex-direction: column;  */
+  }
+  .title-container h2, 
+  .title-container .emoji {
+    font-size: 1.5rem;
+  }
+}
